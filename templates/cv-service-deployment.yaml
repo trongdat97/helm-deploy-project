@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.cv.name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.cv.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.cv.name }}
+    spec:
+      containers:
+      - name: {{ .Values.cv.name }}
+        image: "{{ .Values.cv.image }}:{{ .Values.cv.tag }}"
+        ports:
+        - containerPort: 8400

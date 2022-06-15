@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.eureka.name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.eureka.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.eureka.name }}
+    spec:
+      containers:
+      - name: {{ .Values.eureka.name }}
+        image: "{{ .Values.eureka.image }}:{{ .Values.eureka.tag }}"
+        ports:
+        - containerPort: 8761

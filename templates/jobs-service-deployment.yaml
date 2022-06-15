@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.jobs.name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.jobs.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.jobs.name }}
+    spec:
+      containers:
+      - name: {{ .Values.jobs.name }}
+        image: "{{ .Values.jobs.image }}:{{ .Values.jobs.tag }}"
+        ports:
+        - containerPort: 8200
